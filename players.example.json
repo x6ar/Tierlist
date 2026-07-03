@@ -2,12 +2,14 @@
   "players": [
     {
       "id": "b3e1a2c4-1234-4a5b-9c6d-abcdef123456",
-      "username": "ExamplePlayer1",
-      "avatarUrl": "https://mc-heads.net/avatar/ExamplePlayer1",
-      "region": "NA",
+      "username": "elmeriizzzz",
+      "avatarUrl": "https://mc-heads.net/avatar/elmeriizzzz",
+      "region": "EU",
       "rankings": [
-        { "gamemodeId": "vanilla", "tierId": "ht1", "peakTierId": "ht1", "lastTested": "2026-05-12" },
-        { "gamemodeId": "pot",     "tierId": "lt2", "peakTierId": "ht2", "lastTested": "2026-04-30" }
+        { "gamemodeId": "vanilla", "tierId": "lt2", "peakTierId": "lt2", "lastTested": "2026-07-03" },
+        { "gamemodeId": "mace",     "tierId": "lt4", "peakTierId": "lt3", "lastTested": "2026-07-03" }
+        { "gamemodeId": "sword",     "tierId": "lt4", "peakTierId": "ht4", "lastTested": "2026-07-03" }
+        { "gamemodeId": "uhc",     "tierId": "lt4", "peakTierId": "lt4", "lastTested": "2026-07-03" }
       ],
       "overallPoints": 82,
       "overallRank": "Combat Cadet"
@@ -15,7 +17,7 @@
     {
       "id": "f4d2b3c5-2345-4b6c-8d7e-bcdef2345678",
       "username": "ExamplePlayer2",
-      "avatarUrl": "https://mc-heads.net/avatar/ExamplePlayer2",
+      "avatarUrl": "https://mc-heads.net/avatar/ExampleP",
       "region": "EU",
       "rankings": [
         { "gamemodeId": "sword", "tierId": "ht3", "peakTierId": "ht3", "lastTested": "2026-06-01" }
