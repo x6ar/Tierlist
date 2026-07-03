@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCTiers Leaderboard</title>
+    <style>
+        :root {
+            --bg-body: #0d1117;
+            --bg-panel: #161b22;
+            --bg-row: #21262d;
+            --bg-row-hover: #262c36;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --mctiers-gold: #ffb700;
+            --mctiers-silver: #c0c0c0;
+            --mctiers-bronze: #cd7f32;
+            --rank-master: #ffd700;
+            --rank-ace: #ff4a75;
+            --rank-cadet: #4a90d9;
+            --border-color: #30363d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Top Navigation Bar --- */
+        .navbar {
+            background-color: var(--bg-panel);
+            padding: 15px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #fff;
+            background: linear-gradient(45deg, #ff9e00, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a.active, .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .search-bar {
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: var(--text-main);
+            width: 200px;
+            outline: none;
+        }
+
+        /* --- Main Content Layout --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Gamemode View Tab Selector Pills */
+        .tabs-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--bg-row);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2b333f, #1f242d);
+            border-color: #ffd700;
+            color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
+        }
+
+        /* Table/List Panel */
+        .leaderboard-panel {
+            background-color: var(--bg-panel);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Row Headers */
+        .list-header {
+            display: grid;
+            grid-template-columns: 80px 2.5fr 1fr 2fr;
+            padding: 10px 16px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Individual Player Card Rows */
+        .player-row {
+            display: grid;
+            grid-template-columns: 80px 2.5fr 1fr 2fr;
+            align-items: center;
+            background-color: var(--bg-row);
+            margin-bottom: 12px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background-color 0.2s, transform 0.1s;
+            border: 1px solid transparent;
+        }
+
+        .player-row:hover {
+            background-color: var(--bg-row-hover);
+            border-color: #444c56;
+        }
+
+        /* Custom Angled Rank Styling */
+        .rank-placement {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            font-size: 1.6rem;
+            font-weight: 900;
+            height: 100%;
+            min-height: 70px;
+            background: #2d333b;
+            clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+            padding-right: 15px;
+        }
+
+        /* Top 3 Specific Color Tiers */
+        .row-rank-1 .rank-placement { background: linear-gradient(135deg, #ffd700, #b8860b); color: #000; }
+        .row-rank-2 .rank-placement { background: linear-gradient(135deg, #c0c0c0, #708090); color: #000; }
+        .row-rank-3 .rank-placement { background: linear-gradient(135deg, #cd7f32, #8b4513); color: #fff; }
+
+        /* Profile Block */
+        .player-profile {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .player-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            object-fit: cover;
+            background-color: #0d1117;
+            border: 1px solid var(--border-color);
+        }
+
+        .player-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .player-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .player-rank-sub {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Overall Rank Coloring */
+        .rank-tag-master { color: var(--rank-master); }
+        .rank-tag-ace { color: var(--rank-ace); }
+        .rank-tag-cadet { color: var(--rank-cadet); }
+
+        .points-count {
+            color: var(--text-muted);
+        }
+
+        /* Region Badges */
+        .region-cell {
+            display: flex;
+            align-items: center;
+        }
+
+        .region-pill {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .reg-na { background-color: rgba(255, 74, 117, 0.15); color: #ff4a75; border: 1px solid rgba(255, 74, 117, 0.3); }
+        .reg-eu { background-color: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+
+        /* Horizontal Tiers Badges Setup */
+        .tiers-layout {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .mini-tier-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            min-width: 35px;
+        }
+
+        .mini-icon {
+            font-size: 0.95rem; /* Replace with icons later if needed */
+        }
+
+        .mini-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 1px 4px;
+            border-radius: 3px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Menu Header -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">MCTIERS</div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Rankings</a></li>
+                <li><a href="#">Discords</a></li>
+                <li><a href="#">API Docs</a></li>
+            </ul>
+        </div>
+        <input type="text" class="search-bar" placeholder="Search player...">
+    </nav>
+
+    <div class="main-container">
+        <!-- Gamemode Tab Menu Filters -->
+        <div class="tabs-container" id="tabsContainer">
+            <button class="tab-btn active" onclick="filterGamemode('all')">🏆 Overall</button>
+            <!-- Generated dynamically below -->
+        </div>
+
+        <!-- Leaderboard Main Container -->
+        <div class="leaderboard-panel">
+            <div class="list-header">
+                <div>#</div>
+                <div>Player</div>
+                <div>Region</div>
+                <div>Tiers</div>
+            </div>
+            
+            <div id="leaderboardRows">
+                <!-- Players loop injected here dynamically -->
+            </div>
+        </div>
+    </div>
+
+<script>
+    // System Configurations Direct Mapping
+    const gamemodes = [
+        { "id": "vanilla", "name": "Vanilla", "icon": "🔮", "order": 1 },
+        { "id": "uhc",     "name": "UHC",     "icon": "❤️", "order": 2 },
+        { "id": "pot",     "name": "Pot",     "icon": "🧪", "order": 3 },
+        { "id": "sword",   "name": "Sword",   "icon": "⚔️", "order": 4 },
+        { "id": "axe",     "name": "Axe",     "icon": "🪓", "order": 5 },
+        { "id": "nethop",  "name": "NethOp",  "icon": "😈", "order": 6 },
+        { "id": "smp",     "name": "SMP",     "icon": "🟢", "order": 7 }
+    ];
+
+    const Tiers = [
+        { "id": "ht1", "label": "HT1", "color": "#FFD700" },
+        { "id": "lt1", "label": "LT1", "color": "#E6C200" },
+        { "id": "ht2", "label": "HT2", "color": "#C0C0C0" },
+        { "id": "lt2", "label": "LT2", "color": "#A9A9A9" },
+        { "id": "ht3", "label": "HT3", "color": "#CD7F32" },
+        { "id": "lt3", "label": "LT3", "color": "#B06A28" },
+        { "id": "ht4", "label": "HT4", "color": "#4A90D9" },
+        { "id": "lt4", "label": "LT4", "color": "#3A6FA8" }
+    ];
+
+    const players = [
+        {
+            "username": "ItzRealMe",
+            "avatarUrl": "https://mc-heads.net/avatar/ItzRealMe",
+            "region": "NA",
+            "rankings": [
+                { "gamemodeId": "vanilla", "tierId": "ht1" },
+                { "gamemodeId": "pot", "tierId": "ht1" },
+                { "gamemodeId": "sword", "tierId": "ht3" },
+                { "gamemodeId": "uhc", "tierId": "lt2" }
+            ],
+            "overallPoints": 330,
+            "overallRank": "Combat Master",
+            "classStyle": "rank-tag-master"
+        },
+        {
+            "username": "coldified",
+            "avatarUrl": "https://mc-heads.net/avatar/coldified",
+            "region": "EU",
+            "rankings": [
+                { "gamemodeId": "vanilla", "tierId": "ht1" },
+                { "gamemodeId": "pot", "tierId": "lt1" },
+                { "gamemodeId": "axe", "tierId": "lt1" }
+            ],
+            "overallPoints": 326,
+            "overallRank": "Combat Master",
+            "classStyle": "rank-tag-master"
+        },
+        {
+            "username": "Swight",
+            "avatarUrl": "https://mc-heads.net/avatar/Swight",
+            "region": "NA",
+            "rankings": [
+                { "gamemodeId": "sword", "tierId": "ht1" },
+                { "gamemodeId": "pot", "tierId": "ht3" }
+            ],
+            "overallPoints": 290,
+            "overallRank": "Combat Master",
+            "classStyle": "rank-tag-master"
+        },
+        {
+            "username": "BlvckWlf",
+            "avatarUrl": "https://mc-heads.net/avatar/BlvckWlf",
+            "region": "EU",
+            "rankings": [
+                { "gamemodeId": "sword", "tierId": "ht3" }
+            ],
+            "overallPoints": 226,
+            "overallRank": "Combat Ace",
+            "classStyle": "rank-tag-ace"
+        }
+    ];
+
+    let activeGamemode = 'all';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        buildGamemodeTabs();
+        renderLeaderboard();
+    });
+
+    function buildGamemodeTabs() {
+        const container = document.getElementById("tabsContainer");
+        gamemodes.forEach(gm => {
+            const btn = document.createElement("button");
+            btn.className = "tab-btn";
+            btn.id = `tab-${gm.id}`;
+            btn.innerHTML = `${gm.icon} ${gm.name}`;
+            btn.onclick = () => filterGamemode(gm.id);
+            container.appendChild(btn);
+        });
+    }
+
+    function filterGamemode(gmId) {
+        activeGamemode = gmId;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        if(gmId === 'all') {
+            document.querySelector('.tab-btn').classList.add('active');
+        } else {
+            document.getElementById(`tab-${gmId}`).classList.add('active');
+        }
+        renderLeaderboard();
+    }
+
+    function renderLeaderboard() {
+        const rowsContainer = document.getElementById("leaderboardRows");
+        rowsContainer.innerHTML = "";
+
+        // Filter and sort mechanics
+        let displayedPlayers = [...players];
+        if (activeGamemode !== 'all') {
+            displayedPlayers = displayedPlayers.filter(p => p.rankings.some(r => r.gamemodeId === activeGamemode));
+        }
+        displayedPlayers.sort((a, b) => b.overallPoints - a.overallPoints);
+
+        displayedPlayers.forEach((player, idx) => {
+            const rankNum = idx + 1;
+            const row = document.createElement("div");
+            row.className = `player-row row-rank-${rankNum}`;
+
+            // Build out mini nodes for game ranks 
+            let tiersHTML = '<div class="tiers-layout">';
+            player.rankings.forEach(r => {
+                const gm = gamemodes.find(g => g.id === r.gamemodeId);
+                const tier = Tiers.find(t => t.id === r.tierId);
+                if (gm && tier) {
+                    tiersHTML += `
+                        <div class="mini-tier-node">
+                            <span class="mini-icon">${gm.icon}</span>
+                            <span class="mini-label" style="color: ${tier.color};">${tier.label}</span>
+                        </div>
+                    `;
+                }
+            });
+            tiersHTML += '</div>';
+
+            const regionClass = player.region.toLowerCase() === 'na' ? 'reg-na' : 'reg-eu';
+
+            row.innerHTML = `
+                <div class="rank-placement">${rankNum}.</div>
+                <div class="player-profile">
+                    <img class="player-avatar" src="${player.avatarUrl}" alt="">
+                    <div class="player-details">
+                        <div class="player-name">${player.username}</div>
+                        <div class="player-rank-sub">
+                            <span class="${player.classStyle}">♦ ${player.overallRank}</span>
+                            <span class="points-count">(${player.overallPoints} points)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="region-cell">
+                    <span class="region-pill ${regionClass}">${player.region}</span>
+                </div>
+                <div>${tiersHTML}</div>
+            `;
+            rowsContainer.appendChild(row);
+        });
+    }
+</script>
+</body>
+</html>
