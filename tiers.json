@@ -1,0 +1,14 @@
+{
+  "tiers": [
+    { "id": "ht1", "label": "HT1", "tierLevel": 1, "sublevel": "high", "color": "#FFD700", "points": 60 },
+    { "id": "lt1", "label": "LT1", "tierLevel": 1, "sublevel": "low",  "color": "#E6C200", "points": 45 },
+    { "id": "ht2", "label": "HT2", "tierLevel": 2, "sublevel": "high", "color": "#C0C0C0", "points": 30 },
+    { "id": "lt2", "label": "LT2", "tierLevel": 2, "sublevel": "low",  "color": "#A9A9A9", "points": 22 },
+    { "id": "ht3", "label": "HT3", "tierLevel": 3, "sublevel": "high", "color": "#CD7F32", "points": 15 },
+    { "id": "lt3", "label": "LT3", "tierLevel": 3, "sublevel": "low",  "color": "#B06A28", "points": 10 },
+    { "id": "ht4", "label": "HT4", "tierLevel": 4, "sublevel": "high", "color": "#4A90D9", "points": 6 },
+    { "id": "lt4", "label": "LT4", "tierLevel": 4, "sublevel": "low",  "color": "#3A6FA8", "points": 3 },
+    { "id": "ht5", "label": "HT5", "tierLevel": 5, "sublevel": "high", "color": "#8E8E8E", "points": 1 },
+    { "id": "lt5", "label": "LT5", "tierLevel": 5, "sublevel": "low",  "color": "#6E6E6E", "points": 0.5 }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "pointsSystem": {
+    "description": "Overall region points are summed from a player's best tier placement per gamemode.",
+    "combineMethod": "sum_best_per_gamemode",
+    "overallRanks": [
+      { "title": "Combat Master",     "minPoints": 400 },
+      { "title": "Combat Ace",        "minPoints": 250 },
+      { "title": "Combat Specialist", "minPoints": 150 },
+      { "title": "Combat Cadet",      "minPoints": 75 },
+      { "title": "Combat Novice",     "minPoints": 20 },
+      { "title": "Rookie",            "minPoints": 0 }
+    ]
+  }
+}

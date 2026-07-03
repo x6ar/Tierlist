@@ -1,0 +1,27 @@
+{
+  "players": [
+    {
+      "id": "b3e1a2c4-1234-4a5b-9c6d-abcdef123456",
+      "username": "ExamplePlayer1",
+      "avatarUrl": "https://mc-heads.net/avatar/ExamplePlayer1",
+      "region": "NA",
+      "rankings": [
+        { "gamemodeId": "vanilla", "tierId": "ht1", "peakTierId": "ht1", "lastTested": "2026-05-12" },
+        { "gamemodeId": "pot",     "tierId": "lt2", "peakTierId": "ht2", "lastTested": "2026-04-30" }
+      ],
+      "overallPoints": 82,
+      "overallRank": "Combat Cadet"
+    },
+    {
+      "id": "f4d2b3c5-2345-4b6c-8d7e-bcdef2345678",
+      "username": "ExamplePlayer2",
+      "avatarUrl": "https://mc-heads.net/avatar/ExamplePlayer2",
+      "region": "EU",
+      "rankings": [
+        { "gamemodeId": "sword", "tierId": "ht3", "peakTierId": "ht3", "lastTested": "2026-06-01" }
+      ],
+      "overallPoints": 15,
+      "overallRank": "Combat Novice"
+    }
+  ]
+}

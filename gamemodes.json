@@ -1,0 +1,11 @@
+{
+  "gamemodes": [
+    { "id": "vanilla", "name": "Vanilla", "icon": "vanilla.png", "order": 1 },
+    { "id": "uhc",     "name": "UHC",     "icon": "uhc.png",     "order": 2 },
+    { "id": "pot",     "name": "Pot",     "icon": "pot.png",     "order": 3 },
+    { "id": "sword",   "name": "Sword",   "icon": "sword.png",   "order": 4 },
+    { "id": "axe",     "name": "Axe",     "icon": "axe.png",     "order": 5 },
+    { "id": "nethop",  "name": "NethOp",  "icon": "nethop.png",  "order": 6 },
+    { "id": "smp",     "name": "SMP",     "icon": "smp.png",     "order": 7 }
+  ]
+}

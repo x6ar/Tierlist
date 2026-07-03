@@ -1,0 +1,9 @@
+{
+  "uiConfig": {
+    "defaultView": "gamemode_grid",
+    "sortable": true,
+    "filterByRegion": true,
+    "showPeakTier": true,
+    "showPointsBreakdown": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "pvp-tierlist-config",
+  "version": "1.0.0",
+  "description": "MCTiers-style Minecraft PvP tier list config (gamemodes, tiers, points system) for use in a tier-list web app.",
+  "main": "index.js",
+  "types": "types/tierlist.d.ts",
+  "license": "MIT",
+  "files": [
+    "config",
+    "data",
+    "types",
+    "index.js"
+  ]
+}
