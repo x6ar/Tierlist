@@ -281,7 +281,7 @@
     <!-- Top Menu Header -->
     <nav class="navbar">
         <div class="nav-left">
-            <div class="logo">TONICTIERS</div>
+            <div class="logo">MCTIERS</div>
             <ul class="nav-links">
                 <li><a href="#" class="active">Rankings</a></li>
                 <li><a href="#">Discords</a></li>
@@ -323,8 +323,6 @@
         { "id": "axe",     "name": "Axe",     "icon": "🪓", "order": 5 },
         { "id": "nethop",  "name": "NethOp",  "icon": "😈", "order": 6 },
         { "id": "smp",     "name": "SMP",     "icon": "🟢", "order": 7 }
-         { "id": "spearmace",     "name": "Spear-Mace",     "icon": "🔱", "order": 8 }
-         { "id": "mace",     "name": "Mace",     "icon": "🔨", "order": 9 }
     ];
 
     const Tiers = [
@@ -341,24 +339,60 @@
     const players = [
         {
             "username": "elmeriizzzz",
-            "avatarUrl": "https://mc-heads.net/avatar/elmeriizzzz",
+            "avatarUrl": "https://mc-heads.net/avatar/ItzRealMe",
+            "region": "NA",
+            "rankings": [
+                { "gamemodeId": "vanilla", "tierId": "ht1" },
+                { "gamemodeId": "pot", "tierId": "ht1" },
+                { "gamemodeId": "sword", "tierId": "ht1" },
+                { "gamemodeId": "uhc", "tierId": "lt1" }
+                { "gamemodeId": "mace", "tierId": "ht1" }
+                { "gamemodeId": "spearmace", "tierId": "lt1" }
+                { "gamemodeId": "nethop", "tierId": "ht1" }
+                { "gamemodeId": "smp", "tierId": "lt1" }
+            ],
+            "overallPoints": 330,
+            "overallRank": "Combat Master",
+            "classStyle": "rank-tag-master"
+        },
+        {
+            "username": "coldified",
+            "avatarUrl": "https://mc-heads.net/avatar/coldified",
             "region": "EU",
             "rankings": [
-                { "gamemodeId": "vanilla", "tierId": "lt2" },
-                { "gamemodeId": "pot", "tierId": "ht4" },
-                { "gamemodeId": "sword", "tierId": "lt4" },
-                { "gamemodeId": "uhc", "tierId": "lt4" },
-                { "gamemodeId": "mace", "tierId": "ht3" },
-                { "gamemodeId": "spearmace", "tierId": "lt4" },
-                { "gamemodeId": "axe", "tierId": "ht5" },
-                { "gamemodeId": "nethop", "tierId": "ht5" },
-                { "gamemodeId": "smp", "tierId": "ht5" }
+                { "gamemodeId": "vanilla", "tierId": "ht1" },
+                { "gamemodeId": "pot", "tierId": "lt1" },
+                { "gamemodeId": "axe", "tierId": "lt1" }
             ],
-            "overallPoints": 55,
-            "overallRank": "Combat Novice",
-            "classStyle": "rank-tag-novice"
+            "overallPoints": 326,
+            "overallRank": "Combat Master",
+            "classStyle": "rank-tag-master"
+        },
+        {
+            "username": "Swight",
+            "avatarUrl": "https://mc-heads.net/avatar/Swight",
+            "region": "NA",
+            "rankings": [
+                { "gamemodeId": "sword", "tierId": "ht1" },
+                { "gamemodeId": "pot", "tierId": "ht3" }
+            ],
+            "overallPoints": 290,
+            "overallRank": "Combat Master",
+            "classStyle": "rank-tag-master"
+        },
+        {
+            "username": "BlvckWlf",
+            "avatarUrl": "https://mc-heads.net/avatar/BlvckWlf",
+            "region": "EU",
+            "rankings": [
+                { "gamemodeId": "sword", "tierId": "ht3" }
+            ],
+            "overallPoints": 226,
+            "overallRank": "Combat Ace",
+            "classStyle": "rank-tag-ace"
         }
-        
+    ];
+
     let activeGamemode = 'all';
 
     document.addEventListener("DOMContentLoaded", () => {
