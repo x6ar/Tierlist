@@ -6,6 +6,8 @@
     { "id": "sword",   "name": "Sword",   "icon": "sword.png",   "order": 4 },
     { "id": "axe",     "name": "Axe",     "icon": "axe.png",     "order": 5 },
     { "id": "nethop",  "name": "NethOp",  "icon": "nethop.png",  "order": 6 },
-    { "id": "smp",     "name": "SMP",     "icon": "smp.png",     "order": 7 }
+    { "id": "smp",     "name": "SMP",     "icon": "smp.png",     "order": 7 },
+    { "id": "spearmace",     "name": "Spear Mace",     "icon": "spear_mace.png",     "order": 8 },
+    { "id": "mace",     "name": "Mace",     "icon": "mace.png",     "order": 9 }
   ]
 }
